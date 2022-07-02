@@ -1,4 +1,4 @@
-test: polygone.c module1.c
-	gcc module1.c -o model.out
-	gcc polygone.c 
-	./a.out
+install: main.c module1.c
+	cc module1.c -o model.out
+	cc main.c -o main
+
