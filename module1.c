@@ -4,9 +4,11 @@
 #include <ctype.h>
 #include <string.h>
 
-int name_check(char *string);
+int name_check(char*);
 
-void register_normalize(char *string);
+void register_normalize(char*);
+
+void renamer_func(char*, char*);
 
 int main(int argc, char *argv[])
 {
@@ -17,7 +19,7 @@ int main(int argc, char *argv[])
 	while((dir = readdir(d)) != NULL)
 	{
 		if(name_check(dir->d_name))
-			printf("%s\n", dir->d_name);
+			renamer_func(dir->d_name, argv[1]);
 	}
 	closedir(d);
 
@@ -36,4 +38,37 @@ int name_check(char *string)
 		--string_end;
 	}
 	return 0;
+}
+
+void register_normalize(char *string)
+{
+	size_t str_len = strlen(string);
+	char *string_end = string - 1 + str_len;
+
+	while (*string_end != '.' && string_end > string)
+	{
+		*string_end = tolower(*string_end);
+		--string_end;
+	}
+
+	printf("%s\n", string);
+
+	return;
+}
+
+void renamer_func(char *string, char *path){
+	size_t new_name_len = strlen(string) + strlen(path);
+	char new_name[new_name_len];
+	char old_name[new_name_len];
+
+	sscanf(new_name, "%s", path);
+	sscanf(old_name, "%s", path);
+
+	strcat(old_name, string);
+
+	register_normalize(string);
+
+	strcat(new_name, string);
+
+	rename(old_name, new_name);
 }
