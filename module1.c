@@ -61,14 +61,20 @@ void renamer_func(char *string, char *path){
 	char new_name[new_name_len];
 	char old_name[new_name_len];
 
-	sscanf(new_name, "%s", path);
-	sscanf(old_name, "%s", path);
+	strcpy(old_name, path);
+	strcpy(new_name, path);
+	strcat(old_name, "/");
+	strcat(new_name, "/");
+	
 
 	strcat(old_name, string);
 
 	register_normalize(string);
 
 	strcat(new_name, string);
+	printf("OLD PATH:\t%s\n"
+			"NEW PATH:\t%s\n",
+			old_name, new_name);
 
 	rename(old_name, new_name);
 }
