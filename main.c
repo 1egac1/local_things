@@ -2,17 +2,20 @@
 #include <unistd.h>
 #include <sys/stat.h>
 #include <stdbool.h>
+#include <time.h>
 
 #define DIR_PATH "/home/q/Downloads"
 
-bool check_date(struct stat *date);
+void check_date(struct stat *date, time_t *l_chs);
 
 int main (){
 	struct stat dates;
+	time_t last_changes;
+	time(&last_changes);
 
 	if (stat(DIR_PATH, &dates) == 0) 
 	{
-		check_date(&dates);
+		check_date(&dates, &last_changes);
 	}
 	else
 	{
@@ -20,4 +23,16 @@ int main (){
 	}
 
 	return 0;
+}
+
+void check_date(struct stat *date, time_t *l_chs)
+{
+	if (date->st_ctime > *l_chs)
+	{
+		*l_chs = date->st_ctime;
+	}
+	else
+	{
+		return;
+	}
 }
