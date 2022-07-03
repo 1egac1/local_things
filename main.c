@@ -5,8 +5,8 @@
 #include <stdbool.h>
 #include <time.h>
 
-#define DIR_PATH "/home/q/Downloads"
-#define MODULE_PATH "/home/q/educ/cxx/local_things/model.out"
+#define DIR_PATH "/path/to/dir"
+#define MODULE_PATH "/path/to/model.out"
 
 void check_date(struct stat *date, time_t *l_chs);
 

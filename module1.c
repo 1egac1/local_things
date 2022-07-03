@@ -72,9 +72,9 @@ void renamer_func(char *string, char *path){
 	register_normalize(string);
 
 	strcat(new_name, string);
-	printf("OLD PATH:\t%s\n"
-			"NEW PATH:\t%s\n",
-			old_name, new_name);
+//	printf("OLD PATH:\t%s\n"
+//			"NEW PATH:\t%s\n",
+//			old_name, new_name);
 
 	rename(old_name, new_name);
 }
